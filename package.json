@@ -4,7 +4,8 @@
   "description": "API to generate avatars",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dockerize": "docker build -t suitespot/avatar-generator .",
+    "docker:run": "docker run --rm -it -e PORT=3000 -p 3000:3000 --name suitespot-avatar suitespot/avatar-generator"
   },
   "author": "Will Fairclough",
   "license": "MIT",

@@ -6,10 +6,12 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.get('/_health', (req, res) => {
+  console.log('/_health');
   res.send('ok');
 });
 
 app.get('/avatar/generate', (req, res) => {
+  console.log('/avatar/generate');
   const [reg, dark, light, med] = generatorColorsFromRequest(req);
   const colorIndex = Math.floor(Math.random() * 3);
   const option = {
@@ -43,6 +45,7 @@ function generatorColorsFromRequest(req = { params: {}, query: {} }) {
 }
 
 app.get('/colors/scheme/:scheme.html', (req, res) => {
+  console.log('/colors/scheme/:scheme.html');
   const [reg, dark, light, med] = generatorColorsFromRequest(req);
   res.status(200)
     .contentType('text/html')
@@ -55,6 +58,7 @@ app.get('/colors/scheme/:scheme.html', (req, res) => {
 });
 
 app.get('/colors/scheme/:scheme', (req, res) => {
+  console.log('/colors/scheme/:scheme');
   const colors = generatorColorsFromRequest(req);
 
   res.status(200)
