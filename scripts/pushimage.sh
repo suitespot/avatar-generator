@@ -50,7 +50,7 @@ echo "IMAGE_TAG  = ${SUITESPOT_IMAGE_TAG}"
 echo "IMAGE_NAME = ${IMAGE_NAME}"
 echo "PUSH_IMAGE_NAME = ${PUSH_IMAGE_NAME}"
 
-execute_and_echo docker tag ${IMAGE_NAME}:latest ${SUITESPOT_REGISTRY}/${PUSH_IMAGE_NAME}:latest
-execute_and_echo docker tag ${IMAGE_NAME}:latest ${SUITESPOT_REGISTRY}/${PUSH_IMAGE_NAME}:${SUITESPOT_IMAGE_TAG}
-execute_and_echo docker push ${SUITESPOT_REGISTRY}/${PUSH_IMAGE_NAME}:latest
-execute_and_echo docker push ${SUITESPOT_REGISTRY}/${PUSH_IMAGE_NAME}:${SUITESPOT_IMAGE_TAG}
+execute_and_echo docker tag ${IMAGE_NAME}:latest ${SUITESPOT_REGISTRY}:latest
+execute_and_echo docker tag ${IMAGE_NAME}:latest ${SUITESPOT_REGISTRY}:${SUITESPOT_IMAGE_TAG}
+execute_and_echo docker push ${SUITESPOT_REGISTRY}:latest
+execute_and_echo docker push ${SUITESPOT_REGISTRY}:${SUITESPOT_IMAGE_TAG}
