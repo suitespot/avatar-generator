@@ -29,7 +29,15 @@ const loggerMiddleware = (req, res, next) => {
     const endHrTime = process.hrtime(startHrTime);
     const durationMillis = (endHrTime[0] * 1000) + (endHrTime[1] / 1000000);
     const statusCode = res.statusCode;
-    log.info(`Request: ${req.method} ${req.url} - ${res.statusCode} ${durationMillis.toFixed(2)}ms`, { query: req.query, path: req.path, route: req.route?.path, method: req.method, statusCode });
+    const loggingDetails = {
+      query: req.query,
+      path: req.path,
+      route: req.route?.path,
+      method: req.method,
+      statusCode,
+      responseMs: durationMillis,
+    };
+    log.info(`Request: ${req.method} ${req.url} - ${res.statusCode} ${durationMillis.toFixed(2)}ms`, logginDetails);
   });
   next();
 };
