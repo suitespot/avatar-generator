@@ -7,8 +7,9 @@ RUN apt-get install imagemagick
 
 WORKDIR /usr/src/app
 ENV NODE_ENV production
-ENV PORT 3000
-ENV KEEP_ALIVE_TIMEOUT_MS 240000
+ENV PORT "3000"
+ENV KEEP_ALIVE_TIMEOUT_MS "240000"
+ENV USE_JSON_LOGGER "true"
 
 COPY *.js /usr/src/app/
 COPY *.json /usr/src/app/
