@@ -1,5 +1,6 @@
 const ColorScheme = require('color-scheme');
 const express = require('express');
+const http = require('http');
 const { AvatarGenerator } = require('initials-avatar-generator');
 
 const app = express();
@@ -121,4 +122,10 @@ app.get('/colors/scheme/:scheme', (req, res) => {
     .send(colors);
 });
 
-app.listen(port, () => console.log(`Listening on port ${port}!`));
+
+const server = http.createServer(app);
+server.keepAliveTimeout = parseInt(process.env.KEEP_ALIVE_TIMEOUT_MS, 10) || 240000;
+console.log('KeepAliveTimeout: ' + server.keepAliveTimeout + 'ms');
+server.listen(port, () => {
+  console.log(`Listening on port ${port}`);
+});

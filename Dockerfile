@@ -1,4 +1,4 @@
-FROM node:10.16.3
+FROM --platform=linux/amd64 node:16.18.0
 
 RUN cp /etc/apt/sources.list /etc/apt/sources.list~
 RUN sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list
@@ -8,7 +8,7 @@ RUN apt-get install imagemagick
 WORKDIR /usr/src/app
 ENV NODE_ENV production
 ENV PORT 3000
-
+ENV KEEP_ALIVE_TIMEOUT_MS 240000
 
 COPY *.js /usr/src/app/
 COPY *.json /usr/src/app/

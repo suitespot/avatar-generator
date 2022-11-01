@@ -1,6 +1,6 @@
 {
   "name": "avatar-generator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "API to generate avatars",
   "main": "index.js",
   "scripts": {
@@ -11,8 +11,12 @@
   "author": "Will Fairclough",
   "license": "MIT",
   "dependencies": {
-    "color-scheme": "^1.0.1",
-    "express": "^4.17.1",
-    "initials-avatar-generator": "^1.5.4"
+    "color-scheme": "1.0.1",
+    "express": "4.18.2",
+    "initials-avatar-generator": "1.5.4"
+  },
+  "volta": {
+    "node": "16.18.0",
+    "npm": "8.19.2"
   }
 }
