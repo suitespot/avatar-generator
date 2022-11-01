@@ -1,18 +1,23 @@
 {
   "name": "avatar-generator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "API to generate avatars",
   "main": "index.js",
   "scripts": {
-    "dockerize": "docker build -t suitespot/avatar-generator .",
+    "dockerize": "docker build --build-arg NPM_TOKEN=${NPM_TOKEN} -t suitespot/avatar-generator .",
     "docker:run": "docker run --rm -it -e PORT=3000 -p 3000:3000 --name suitespot-avatar suitespot/avatar-generator",
-    "publish": "./scripts/pushimage.sh --image-name=suitespot/avatar-generator --tag=$(git rev-parse HEAD)"
+    "pushImage": "./scripts/pushimage.sh --image-name=suitespot/avatar-generator --tag=$(git rev-parse HEAD)"
   },
   "author": "Will Fairclough",
   "license": "MIT",
   "dependencies": {
-    "color-scheme": "^1.0.1",
-    "express": "^4.17.1",
-    "initials-avatar-generator": "^1.5.4"
+    "@suitespot/cloud-logger": "1.0.5",
+    "color-scheme": "1.0.1",
+    "express": "4.18.2",
+    "initials-avatar-generator": "1.5.4"
+  },
+  "volta": {
+    "node": "16.18.0",
+    "npm": "8.19.2"
   }
 }

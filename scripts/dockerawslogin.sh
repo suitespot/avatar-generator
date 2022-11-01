@@ -1,12 +1,8 @@
 #!/bin/bash
-set -o nounset
-set -o errexit
-set -o pipefail
 
-function execute_and_echo {
-    echo "$@"
-    "$@"
-}
+set -ex
 
-DOCKER_LOGON=$(aws ecr get-login --no-include-email --region ca-central-1)
-execute_and_echo ${DOCKER_LOGON}
+AWS_ACCT_ID=${AWS_ACCT_ID:-572758539257}
+AWS_REGION=${AWS_REGION:-ca-central-1}
+
+aws --region $AWS_REGION ecr get-login-password | docker login --username "AWS" --password-stdin "$AWS_ACCT_ID.dkr.ecr.$AWS_REGION.amazonaws.com"
