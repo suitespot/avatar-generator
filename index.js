@@ -3,6 +3,7 @@ const express = require('express');
 const http = require('http');
 const { LogFactory } = require('@suitespot/cloud-logger');
 const { AvatarGenerator } = require('initials-avatar-generator');
+const { setKeepAlive } = require('./keep-alive');
 
 const log = LogFactory.getLogger('AvatarService');
 
@@ -143,8 +144,8 @@ app.use(errorHandler);
 
 
 const server = http.createServer(app);
-server.keepAliveTimeout = parseInt(process.env.KEEP_ALIVE_TIMEOUT_MS, 10) || 240000;
-log.info('KeepAliveTimeout: ' + server.keepAliveTimeout + 'ms');
+setKeepAlive(server);
+
 server.listen(port, () => {
   log.info(`Listening on port ${port}`);
 });
