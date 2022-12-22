@@ -4,9 +4,7 @@ metadata:
   name: avatar-generator
   description: Microservice to generate Avatars with initials
   annotations:
-    circleci.com/project-slug: github/suitespot/avatar-generator
     github.com/project-slug: suitespot/avatar-generator
-    sentry.io/project-slug: avatar-generator
 spec:
   type: service
   owner: platform-team
