@@ -8,4 +8,5 @@ metadata:
 spec:
   type: service
   owner: platform
+  system: suitespot
   lifecycle: production
