@@ -7,5 +7,5 @@ metadata:
     github.com/project-slug: suitespot/avatar-generator
 spec:
   type: service
-  owner: platform-team
+  owner: platform
   lifecycle: production
