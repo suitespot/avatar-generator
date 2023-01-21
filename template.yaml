@@ -30,8 +30,12 @@ Resources:
         AvatarGen:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
-            Path: /avatar-gen
+            Path: /avatar/{b64ImageOpts}
             Method: get
+            RequestParameters:
+              - method.request.path
+                Required: true
+
     Metadata: # Manage esbuild properties
       BuildMethod: esbuild
       BuildProperties:
