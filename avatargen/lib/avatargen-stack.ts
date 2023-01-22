@@ -1,24 +1,32 @@
-import * as cdk from '@aws-cdk/core';
+import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
-import * as lambda from '@aws-cdk/aws-lambda-nodejs';
 import * as apigateway from 'aws-cdk-lib/aws-apigateway';
+import * as lambda from 'aws-cdk-lib/aws-lambda';
+import * as esbuild from 'esbuild';
 
 export class AvatargenStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    const handler = new lambda.NodejsFunction(this, 'AvatarGenHandler', {
+    esbuild.buildSync({
+      entryPoints: ['func/avatargen.js'],
+      bundle: true,
+      minify: true,
+      sourcemap: true,
+      format: 'cjs',
+      outfile: 'dist/avatargen/bundle.js',
+      platform: 'node',
+      target: 'node16',
+      logLevel: 'info',
+    });
+
+    const handler = new lambda.Function(this, 'AvatarGenHandler', {
       runtime: lambda.Runtime.NODEJS_16_X,
-      code: lambda.Code.fromAsset('resources'),
-      handler: 'avatargen.main',
+      code: lambda.Code.fromAsset('dist'),
+      handler: 'avatargen/bundle.main',
       environment: {
         DEFAULT_AVATAR_SIZE: '128',
       },
-    });
-
-    new lambda.NodejsFunction(this, 'MyFunction', {
-      entry: '/path/to/my/file.ts', // accepts .js, .jsx, .ts, .tsx and .mjs files
-      handler: 'myExportedFunc', // defaults to 'handler'
     });
 
     const api = new apigateway.RestApi(this, 'AvatarGenAPI', {
