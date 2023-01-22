@@ -30,7 +30,9 @@ jobs:
           role-session-name: GH-${{ github.workflow }}-${{ github.job }}
       - name: Install dependencies
         run: npm install
+      - run: |
+          echo "$GITHUB_WORKSPACE/node_modules/.bin" >> $GITHUB_PATH
       - name: Synth stack
-        run: npx cdk synth
+        run: cdk synth
       - name: Deploy stack
-        run: npx cdk deploy --all --require-approval never
+        run: cdk deploy --all --require-approval never

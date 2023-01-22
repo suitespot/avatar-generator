@@ -3,18 +3,18 @@ import { Construct } from 'constructs';
 import * as apigateway from 'aws-cdk-lib/aws-apigateway';
 import * as lambda from 'aws-cdk-lib/aws-lambda';
 import * as esbuild from 'esbuild';
-import { join } from 'path';
+
 export class AvatargenStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
     esbuild.buildSync({
-      entryPoints: [join(__dirname, '..', 'func', 'avatargen.js')],
+      entryPoints: ['func/avatargen.js'],
       bundle: true,
       minify: true,
       sourcemap: true,
       format: 'cjs',
-      outfile: join(__dirname, '..', 'dist', 'avatargen', 'bundle.js'),
+      outfile: 'dist/avatargen/bundle.js',
       platform: 'node',
       target: 'node16',
       logLevel: 'info',
